@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ecommerce-Gorosito-Figueroa';
+
+  idChild:number=-1;
+  recId(id: number) {
+    this.idChild=id;
+  }
 }
+
