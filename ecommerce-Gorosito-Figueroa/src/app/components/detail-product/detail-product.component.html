@@ -29,7 +29,7 @@
             <div class="card-body">
               <h5 class="card-title" id="nombre">{{productSelected.title}}</h5>
               <p class="card-text" id="precio">$ {{productSelected.price}}</p>
-              <a href="/boutique/mycart.html" class="btn btn-primary" id="boton">ADD TO CART</a>
+              <a (click)="saveProduct()" [routerLink]="['/cart']" class="btn btn-primary" id="boton">ADD TO CART</a>
             </div>
           </div>
         </div>

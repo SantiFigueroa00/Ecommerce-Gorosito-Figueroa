@@ -11,6 +11,7 @@ import { MainLayoutComponent } from './components/shared/main-layout/main-layout
 import { DetailProductComponent } from './components/detail-product/detail-product.component';
 import { NavBarComponent } from './components/shared/nav-bar/nav-bar.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
