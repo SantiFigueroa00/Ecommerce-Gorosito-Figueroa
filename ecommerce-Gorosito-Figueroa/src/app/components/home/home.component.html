@@ -6,7 +6,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{p.title}}</h5>
                 <p>${{p.price}}</p>
-                <a href="/boutique/prod1.html" class="btn btn-primary">Ir a Producto</a>
+                <a [routerLink]="['/detail',p.id]" class="btn btn-primary">Ir a Producto</a>
             </div>
         </div>
     </div>
