@@ -48,9 +48,13 @@ export class CartComponent implements OnInit{
   }
 
   pay(){
-    localStorage.clear();
-    this.ngOnInit();
-    alert("Pago Exitoso")
+    if(this.getStorage().length!=0){
+      localStorage.clear();
+      this.ngOnInit();
+      alert("Pago Exitoso");
+    }else{
+      alert("No se puede pagar, si no agrego productos al carrito!");
+    }
   }
 
   deletProd(id:number){
