@@ -12,6 +12,8 @@ import { DetailProductComponent } from './components/detail-product/detail-produ
 import { NavBarComponent } from './components/shared/nav-bar/nav-bar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AsideBarComponent } from './components/aside-bar/aside-bar.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -21,14 +23,17 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     CartComponent,
     MainLayoutComponent,
     DetailProductComponent,
-    NavBarComponent
+    NavBarComponent,
+    AsideBarComponent,
+  
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

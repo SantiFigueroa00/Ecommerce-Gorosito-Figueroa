@@ -1,13 +1,31 @@
-<div class="row mt-5 mb-5">
-    <div class="col-4  mb-5" *ngFor="let p of products">
-        <div class="card" style="width: 18rem;">
-            <img src={{p.images[0]}}
-                class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">{{p.title}}</h5>
-                <p>${{p.price}}</p>
-                <a [routerLink]="['/detail',p.id]" class="btn btn-primary">Ir a Producto</a>
+<div class="container-fluid">
+    <div
+        class="row g-2 pb-2"
+    >
+        <div class="col-3 px-2 mt-5" >
+            <div class="card" id="asideBar">
+                <app-aside-bar></app-aside-bar>
             </div>
         </div>
+        <div class="col-9 px-2" >
+            <div class="row mt-5 mb-5">
+                <div class="col-4  mb-5" *ngFor="let p of products">
+                    <div class="card" style="width: 18rem;">
+                        <img src={{p.images[0]}}
+                            class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{p.title}}</h5>
+                            <p>${{p.price}}</p>
+                            <a [routerLink]="['/detail',p.id]" class="btn btn-primary">Ir a Producto</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
+    
+    
 </div>
+
+

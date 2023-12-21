@@ -1,0 +1,20 @@
+<div class="list-group">
+        
+    <form class="d-flex" role="search" #myForm="ngForm" (ngSubmit)="filterByTitle(myForm)">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="prodFilter.title" name="title">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+    <label for="price">Filter by Price</label>
+    <div class="d-flex">
+        <input class="form-control me-2" type="number" placeholder="By Price" aria-label="price" [(ngModel)]="prodFilter.price" name="price">
+        <button class="btn btn-outline-success" type="button" (click)="filterByPrice(prodFilter.price)">Aplicar</button>
+    </div>
+    <label for="price">Filter by Range of Price</label>
+    <div class="d-flex">
+        <input class="form-control me-2" min="1" type="number" placeholder="Min" aria-label="Price min" [(ngModel)]="rangePrice.min" name="priceMin">
+        <input class="form-control me-2" min="1" type="number" placeholder="Max" aria-label="Price max" [(ngModel)]="rangePrice.max" name="priceMax">
+        <button class="btn btn-outline-success" type="button" (click)="filterByRange(rangePrice.min,rangePrice.max)">Aplicar</button>
+    </div>
+    
+
+</div>
