@@ -52,4 +52,11 @@ export class CartComponent implements OnInit{
     this.ngOnInit();
     alert("Pago Exitoso")
   }
+
+  deletProd(id:number){
+    let listStorage:any[] = this.getStorage();
+    const copyList = listStorage.filter(product => product.id != id);
+    this.setStorage("listaCarrito", copyList);
+    this.ngOnInit();
+  }
 }
