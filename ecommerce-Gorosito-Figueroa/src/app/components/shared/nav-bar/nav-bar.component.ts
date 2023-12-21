@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { NavbarService } from '../../../services/navbar.service';
+import { HomeServiceService } from '../../../services/home-service.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -10,7 +10,7 @@ export class NavBarComponent implements OnInit{
 
 categories: any;
 
-constructor(public navBarService :NavbarService){
+constructor(public homeService :HomeServiceService){
 }
 
 ngOnInit(): void {
@@ -19,7 +19,7 @@ ngOnInit(): void {
 
 
 listCategories(){
-  this.navBarService.getAllCategories().subscribe((res)=>{
+  this.homeService.getAllCategories().subscribe((res)=>{
     this.categories=res;
   })
 }

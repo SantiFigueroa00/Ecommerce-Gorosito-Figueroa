@@ -3,6 +3,7 @@ import { Product } from "../../models/Product";
 import { NgForm } from '@angular/forms';
 import { HomeServiceService } from '../../services/home-service.service';
 import { HomeComponent } from "../home/home.component";
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-aside-bar',
@@ -16,42 +17,58 @@ export class AsideBarComponent implements OnInit {
     max:null
   };
 
-  prodFilter:Product = {
-    id: 0,
-    title: '',
-    price: 0,
-    description: '',
+  categories: any;
+
+  prodFilter:any = {
+    title: undefined,
+    price: null,
     category:{
-      id:0,
+      id:undefined,
       name:'',
-      image:'', 
-  },
-  images:[]
+  }
   }
 
-  constructor(public homeService: HomeServiceService){}
+  constructor(public homeService: HomeServiceService, private router: Router, private route: ActivatedRoute){}
 
   ngOnInit(): void {
+    this.listCategories();
   }
 
-  filterByTitle(myForm:NgForm){
-    console.log(myForm.value.title);
-    this.homeService.setTitle(myForm.value.title);
+  listCategories(){
+    this.homeService.getAllCategories().subscribe((res)=>{
+      this.categories=res;
+    })
   }
 
-  filterByPrice(price:number){
-    console.log(price);
-    this.homeService.setPrice(price);
-  }
+  applyFilters(): void {
+    // Construir el objeto queryParams con todos los filtros
+    const queryParams: any = {};
 
-  filterByRange(min:number|null,max:number|null){
-    if(min==null || max==null){
-      alert("No puede ingresar valores nulos")
-    }else{
-      const auxMin=min,auxMax=max;
-      console.log(auxMin,auxMax);
-      this.homeService.setRange(auxMin,auxMax);
+    if (this.prodFilter.title !== null && this.prodFilter.title !== undefined) {
+      queryParams.title = this.prodFilter.title;
     }
+
+    if (this.prodFilter.price !== null && this.prodFilter.price !== undefined) {
+      queryParams.price = this.prodFilter.price;
+    }
+
+    if (this.rangePrice.min !== null && this.rangePrice.min !== undefined) {
+      queryParams.priceMin = this.rangePrice.min;
+    }
+
+    if (this.rangePrice.max !== null && this.rangePrice.max !== undefined) {
+      queryParams.priceMax = this.rangePrice.max;
+    }
+
+    if (this.prodFilter.category.id !== null && this.prodFilter.category.id !== undefined) {
+      queryParams.categoryId = this.prodFilter.category.id;
+    }
+
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: queryParams,
+    });
   }
+  
 }
 

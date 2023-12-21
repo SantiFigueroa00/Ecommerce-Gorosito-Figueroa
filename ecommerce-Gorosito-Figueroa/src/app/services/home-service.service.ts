@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, map, pipe } from 'rxjs';
 
@@ -6,10 +6,6 @@ import { Observable, Subject, map, pipe } from 'rxjs';
   providedIn: 'root'
 })
 export class HomeServiceService {
-
-  private titleSubject = new Subject<string>();
-  private priceSubject = new Subject<number>();
-  private rangeSubject = new Subject<{min:number,max:number}>();
 
   constructor(private http : HttpClient) { }
 
@@ -21,10 +17,9 @@ export class HomeServiceService {
   }
 
 
-  // public getIdCategory(id: any): Observable<any> {
-  //   categories
-  //   return
-  // }
+  public getGetProductById(productId: string): Observable<any>{
+    return this.http.get(this.API_URL+"/products/"+productId);
+  }
 
   public getAllProductsByCategory(id: any): Observable<any> {
         const products = this.http.get(this.API_URL+"/categories/"+id+"/products");
@@ -35,38 +30,33 @@ export class HomeServiceService {
     return this.http.get(this.API_URL+"/categories");
   }
 
-  public getProductsByTitle(title:string):Observable<any>{
-    return this.http.get(this.API_URL+"/products/?title="+title);
-  } 
+  getProductsFilters(queryParams: any): Observable<any> {
+    // Construir los parámetros de consulta usando HttpParams
+    let params = new HttpParams();
 
-  public setTitle(title: string): void {
-    this.titleSubject.next(title);
-  }
+    if (queryParams.title) {
+      params = params.set('title', queryParams.title);
+    }
 
-  
-  public getTitleObservable(): Observable<string> {
-    return this.titleSubject.asObservable();
-  }
-  public setPrice(price: number): void {
-    this.priceSubject.next(price);
-  }
-  public getPriceObservable(): Observable<number> {
-    return this.priceSubject.asObservable();
-  }
+    if (queryParams.price) {
+      params = params.set('price', queryParams.price);
+    }
 
-  public getProductsByPrice(price:number):Observable<any>{
-    return this.http.get(this.API_URL+"/products/?price="+price);
-  } 
-  public setRange(min: number,max:number): void {
-    this.rangeSubject.next({min,max});
-  }
-  public getRangeObservable(): Observable<{min:number,max:number}> {
-    return this.rangeSubject.asObservable();
-  }
+    if (queryParams.priceMin) {
+      params = params.set('price_min', queryParams.priceMin);
+    }
 
-  public getProductsByRange(min: number,max:number):Observable<any>{
-    console.log(this.API_URL+"/products/?price_min="+min+"&price_max="+max)
-    return this.http.get(this.API_URL+"/products/?price_min="+min+"&price_max="+max);
-  } 
-}
+    if (queryParams.priceMax) {
+      params = params.set('price_max', queryParams.priceMax);
+    }
+
+    if (queryParams.categoryId) {
+      params = params.set('categoryId', queryParams.categoryId);
+    }
+
+    // Construir la URL completa
+    const url = `${this.API_URL}/products/`;
+    return this.http.get(url, { params: params });
+  }
+} 
 

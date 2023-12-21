@@ -1,22 +1,31 @@
 <div class="list-group me-5">
-        
-    <form class="d-flex mb-4" role="search" #myForm="ngForm" (ngSubmit)="filterByTitle(myForm)">
-        <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search" [(ngModel)]="prodFilter.title" name="title">
-        <button class="btn btn-outline-dark" type="submit">Search</button>
-    </form>
+
     <div class="mb-4">
-    <label for="price">Filter by Price</label>
-    <div class="d-flex">
-        <input class="form-control me-2" type="number" placeholder="By Price" aria-label="price" [(ngModel)]="prodFilter.price" name="price">
-        <button class="btn btn-outline-dark" type="button" (click)="filterByPrice(prodFilter.price)">Aplicar</button>
+        <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search"
+            [(ngModel)]="prodFilter.title" name="title">
     </div>
-</div>
-    <label for="price">Filter by Range of Price</label>
-    <div class="d-flex">
-        <input class="form-control me-2" min="1" type="number" placeholder="Min" aria-label="Price min" [(ngModel)]="rangePrice.min" name="priceMin">
-        <input class="form-control me-2" min="1" type="number" placeholder="Max" aria-label="Price max" [(ngModel)]="rangePrice.max" name="priceMax">
-        <button class="btn btn-outline-dark" type="button" (click)="filterByRange(rangePrice.min,rangePrice.max)">Aplicar</button>
+    <div class="mb-4">
+        <label for="price">Filter by Price</label>
+        <div class="d-flex">
+            <input class="form-control me-2" type="number" placeholder="By Price" aria-label="price"
+                [(ngModel)]="prodFilter.price" name="price">
+        </div>
+        <label for="price">Filter by Range of Price</label>
+        <div class="d-flex">
+            <input class="form-control me-2" min="1" type="number" placeholder="Min" aria-label="Price min"
+                [(ngModel)]="rangePrice.min" name="priceMin">
+            <input class="form-control me-2" min="1" type="number" placeholder="Max" aria-label="Price max"
+                [(ngModel)]="rangePrice.max" name="priceMax">
+        </div>
     </div>
-    
+    <div class="mb-4">
+        <div class="d-flex">
+            <select class="form-select" aria-label="Default select example" [(ngModel)]="prodFilter.category.id">
+                <option selected>Select category</option>
+                <option value="{{c.id}}" *ngFor="let c of categories" >{{c.name}}</option>
+            </select>
+        </div>
+    </div>
+    <button class="btn btn-outline-dark" type="button" (click)="applyFilters()">Apply Filters</button>
 
 </div>
